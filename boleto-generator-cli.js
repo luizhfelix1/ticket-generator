@@ -1,7 +1,7 @@
 var Boleto = require('node-boleto').Boleto;
 
 var boleto = new Boleto({
-  'banco': "santander", // nome do banco dentro da pasta 'banks'
+  'banco': "bradesco", // nome do banco dentro da pasta 'banks'
   'data_emissao': new Date(),
   'data_vencimento': new Date(new Date().getTime() + 5 * 24 * 3600 * 1000), // 5 dias futuramente
   'valor': 1500000, // R$ 15,00 (valor em centavos)
