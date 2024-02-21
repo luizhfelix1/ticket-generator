@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "boleto-node": "^2.0.11",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "gerador-boletos": "^1.2.4",
+    "html-pdf": "^3.0.1",
+    "moment": "^2.30.1",
+    "node-boleto": "^2.2.1",
+    "pagarme": "^4.34.0"
+  }
+}

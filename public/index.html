@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Boleto</title>
+</head>
+<body>
+
+  <form id="boletoForm">
+    <label for="banco">Banco:</label>
+    <input type="text" id="banco" name="banco" value="santander" readonly><br>
+
+    <label for="valor">Valor:</label>
+    <input type="number" id="valor" name="valor" value="1500"><br>
+
+    <button type="button" onclick="gerarBoleto()">Gerar Boleto</button>
+  </form>
+
+  <div id="resultadoBoleto">
+    <!-- O resultado do boleto será exibido aqui -->
+  </div>
+
+  <script>
+    async function gerarBoleto() {
+      var boletoData = {
+        'banco': document.getElementById('banco').value,
+        'valor': parseFloat(document.getElementById('valor').value),
+        'data_emissao': new Date(),
+        'data_vencimento': new Date(new Date().getTime() + 5 * 24 * 3600 * 1000),
+        // Adicione mais campos conforme necessário
+      };
+
+      // Envie uma solicitação POST para o servidor
+      const response = await fetch('/gerar-boleto', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(boletoData),
+      });
+
+      if (!response.ok) {
+        console.error('Erro na geração do boleto');
+        return;
+      }
+
+      // Receba o resultado e abra-o em uma nova aba
+      const boletoHTML = await response.text();
+      const newWindow = window.open('', '_blank');
+      newWindow.document.write(boletoHTML);
+    }
+  </script>
+
+</body>
+</html>
